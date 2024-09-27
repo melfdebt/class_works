@@ -8,24 +8,23 @@ using namespace std;
 template<typename T>
 class DinamicMassive {
 public:
-    void show() {
-        if (size == 0) return;
-        for (int i = 0; i < size; i++) {
-            cout << array[i]<<' ';
-        }
-        cout << endl;
-    }
-    void createArray() {
+    DinamicMassive() {
         array = new T[size];
     }
-    void showSize() {
-        cout <<"size: "<< size << endl;
-    }
-    void deleteArray() {
+    ~DinamicMassive() {
         size = 0;
         delete[] array;
     }
-
+    void show() {
+        if (size == 0) return;
+        for (int i = 0; i < size; i++) {
+            cout << array[i] << ' ';
+        }
+        cout << endl;
+    }
+    void showSize() {
+        cout << "size: " << size << endl;
+    }
     T* addElem(T e) {
         T* buf = new T[size + 1];
         for (int i = 0; i < size; i++) {
@@ -39,7 +38,7 @@ public:
     }
     T* deleteLastElem() {
         T* buf = new T[size - 1];
-        for (int i = 0; i < size-1; i++) {
+        for (int i = 0; i < size - 1; i++) {
             buf[i] = array[i];
         }
         delete[] array;
@@ -50,7 +49,7 @@ public:
 
 private:
     T* array;
-    int size=0;
+    int size = 0;
 };
 
 int main()
@@ -58,7 +57,6 @@ int main()
     setlocale(LC_ALL, "rus");
     srand(time(NULL));
     DinamicMassive<int> array;
-    array.createArray();
     array.show();
     array.showSize();
     for (int i = 0; i < 10; i++) {
@@ -68,10 +66,6 @@ int main()
     array.showSize();
     array.show();
     array.deleteLastElem();
-    array.show();
-    array.deleteArray();
-    array.show();
     array.showSize();
-
+    array.show();
 }
-
