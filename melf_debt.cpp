@@ -47,6 +47,12 @@ public:
         return array;
     }
 
+   int byIndex(int index) {
+       if (index > size or index < 0) {
+           return -1;
+       }
+       else return array[index];
+    }
 private:
     T* array;
     int size = 0;
@@ -68,4 +74,5 @@ int main()
     array.deleteLastElem();
     array.showSize();
     array.show();
+    cout << array.byIndex(90);
 }
