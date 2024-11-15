@@ -8,14 +8,14 @@ inline List<T>::List()
 }
 
 template<typename T>
-List<T>::List(T* arr, int size)//fhkscnkscnsn
+List<T>::List(T* arr, int size)
 {
 	this->first = arr;
 	this->last = *arr[size];
 	Node<T>* now = arr;
-	for (int i = 1; i < size-1; i++) {
-		now.next = *arr[i];
-		now = now.next;
+	for (int i = 1; i < size - 1; i++) {
+		now->setNext() = *arr[i];
+		now = now->getNext();
 	}
 	this->last->next = nullptr;
 }
@@ -25,29 +25,30 @@ List<T>::List(Node<T>* first) : first(first) {
 }
 
 template<typename T>
-List<T>::List(Node<T>* first, Node<T>* last): first(first),  last(last)
+List<T>::List(Node<T>* first, Node<T>* last) : first(first), last(last)
 {
 }
 
 template<typename T>
-List<T>::~List()
+List<T>::~List()//jfdjjdf
 {
+	
 }
 
 template<typename T>
 bool List<T>::isEmpty()
 {
-	return (first==nullptr);
+	return (this->first == nullptr);
 }
 
 template<typename T>
 int List<T>::getLenght()
 {
 	int lenght = 0;
-	Node<T>* now = first;
-	while (now->next != nullptr) {
+	Node<T>* now = this->first;
+	while (now->setNext() != nullptr) {
 		lenght++;
-		now = now.next;
+		now = now->getNext();
 	}
 	return lenght;
 }
@@ -55,28 +56,28 @@ int List<T>::getLenght()
 template<typename T>
 void List<T>::addElem(Node<T>* node)
 {
-	this->last.next = node;
+	this->last->setNext() = node;
 	this->last = node;
 }
 
 template<typename T>
 void List<T>::print()
 {
-	Node<T>* now = first;
+	Node<T>* now = this->first;
 	for (int i = 0; i < getLenght(); i++) {
-		cout << now.getValue() << " ";
-		now = now.next;
+		cout << now->getValue() << " ";
+		now = now->getNext();
 	}
 }
 
 template<typename T>
 Node<T>* List<T>::searchValue(T value)
 {
-	Node<T>* now = first;
+	Node<T>* now = this->first;
 	for (int i = 0; i < getLenght(); i++) {
-		if (now.getValue() == value) return now;
+		if (now->getValue() == value) return now;
 		else {
-			now = now.getNext();
+			now = now->getNext();
 		}
 	}
 	return nullptr;
@@ -85,44 +86,47 @@ Node<T>* List<T>::searchValue(T value)
 template<typename T>
 void List<T>::deleteFirst()
 {
-	this->first = first->next;
+	Node<T>* buf = this->first;
+	this->first = buf->getNext();
+	delete first;
 }
 
 template<typename T>
 void List<T>::deleteLast()
 {
-	Node<T>* now = first;
+	Node<T>* now = this->first;
 	for (int i = 0; i < getLenght(); i++)
 	{
-		if (now.next == this->last) {
+		if (now->getNext() == this->last) {
 			this->last = now;
-			now.next = nullptr;
+			now->setNext() = nullptr;
 			break;
 		}
-		now = now.next;
+		now = now->getNext();
 	}
 }
 
 template<typename T>
 void List<T>::deleteElem(T value)
 {
-	Node<T>* now = first;
+	Node<T>* now = this->first;
 	for (int i = 0; i < getLenght(); i++)
 	{
-		if (now.next.getValue() == value) {
-			now.next = now.next.next;
+		if (now->getNext()== value) {
+			now->setNext = now->getNext()->getNext();
 			break;
 		}
-		now = now.next;
+		now = now->getNext();
 	}
 }
 
 template<typename T>
 Node<T>* List<T>::operator[](int i)
 {
-	Node<T>* now = first;
+	Node<T>* now = this->first;
 	for (int e = 0; e < i; e++) {
-		now = now.next;
+		now = now->getNext();
 	}
-	return now.next;
+	return now->getNext();
 }
+
